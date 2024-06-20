@@ -95,7 +95,16 @@ void WhillNode::OnControllerJoy(const sensor_msgs::msg::Joy::SharedPtr joy)
 
 void WhillNode::OnControllerCmdVel(const geometry_msgs::msg::Twist::SharedPtr cmd_vel)
 {
-  whill_->SendSetVelocityCommand((int)cmd_vel->linear.x, (int)cmd_vel->angular.z);
+  // [m/s] to [km/h]: *3.6
+  // SetVelocityCommand takes command unit (0.004 km/h): *250
+  int linear = cmd_vel->linear.x * 900;
+
+  // wheel_tread: 0.496
+  // [rad/s] to [km/h]: *wheel_tread*3.6
+  // SetVelocityCommand takes command unit (0.004 km/h): *250
+  // The direction of rotation is reversed in ROS and SetVelocityCommand
+  int angular = cmd_vel->angular.z * -446.4;
+  whill_->SendSetVelocityCommand(linear, angular);
   RCLCPP_INFO(
     this->get_logger(), "[CmdVel] linear:['%f'], angular:['%f']", cmd_vel->linear.x,
     cmd_vel->angular.z);

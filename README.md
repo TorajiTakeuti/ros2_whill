@@ -131,7 +131,7 @@ ros2 topic pub -r 12 /whill/controller/joy sensor_msgs/Joy "{axes:[0, 0.25]}"
 ##### Spin WHILL counterclockwise with direct velocity inputs
 
 ```sh
-ros2 topic pub -r 12 /whill/controller/cmd_vel geometry_msgs/Twist '{linear: {x: 0}, angular: {z: -400.0}}'
+ros2 topic pub -r 12 /whill/controller/cmd_vel geometry_msgs/Twist '{linear: {x: 0}, angular: {z: 0.785}}'
 ```
 
 
