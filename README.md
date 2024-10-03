@@ -148,6 +148,7 @@ ros2 service call /whill/set_speed_profile_srv whill_msgs/SetSpeedProfile '{s1: 
 |:---|:---|
 | whill | Meta package. Dependencies are described. |
 | [whill_bringup](./whill_bringup/README.md) | Launch package. You can start WHILL node with this package. |
+| [whill_description](./whill_description/README.md) | Description package. The URDF file is here. |
 | [whill_driver](./whill_driver/README.md) | Controller package. WHILL domains are implemented. |
 | [whill_examples](./whill_examples/README.md) | Examples. You can try demos with this package. |
 | [whill_msgs](https://github.com/WHILL/ros2_whill_interfaces) | Interfaces package. This package exists in a different repository. |
