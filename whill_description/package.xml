@@ -6,4 +6,8 @@
   <description>WHILL Model CR2 description package</description>
   <maintainer email="george.mandokoro@whill.inc">George Mandokoro</maintainer>
   <license>MIT</license>
+  <exec_depend>urdf</exec_depend>
+  <export>
+   <build_type>ament_cmake</build_type>
+  </export>
 </package>
