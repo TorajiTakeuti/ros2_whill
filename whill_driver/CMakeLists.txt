@@ -30,7 +30,7 @@ ament_target_dependencies(whill
   std_msgs
   sensor_msgs
   geometry_msgs
- "whill_msgs"
+  whill_msgs
 )
 
 add_library(whill_node SHARED
