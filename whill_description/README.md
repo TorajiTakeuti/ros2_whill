@@ -2,7 +2,13 @@
 
 ## About
 
-The "whill_description" is a ROS2 package for descriptions of WHILL Model CR2. <br>
+The "whill_description" is a ROS2 package for descriptions of WHILL Model CR2.  
+
+To preview the URDF, run the following command:
+
+```
+ros2 launch urdf_tutorial display.launch.py model:="$(ros2 pkg prefix whill_description --share)/urdf/whill_model_cr2.urdf"
+```
 
 
 ## License
