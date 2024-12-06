@@ -54,6 +54,8 @@ namespace whill_msgs {
     }
     class SetSpeedProfileSrv{
     }
+    class SetBatterySavingSrv{
+    }
 }
 
 namespace c {

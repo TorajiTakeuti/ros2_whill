@@ -103,6 +103,7 @@ ros2 run whill_driver whill --ros-args -p port_name:=/dev/ttyUSB1
 |:---|:---|:---|
 | /whill/set_power_srv | [whill_msgs/SetPower](https://github.com/WHILL/ros2_whill_interfaces/blob/humble/whill_msgs/srv/SetPower.srv) | Turn WHILL power on/off |
 | /whill/set_speed_profile_srv | [whill_msgs/SetSpeedProfile](https://github.com/WHILL/ros2_whill_interfaces/blob/humble/whill_msgs/srv/SetSpeedProfile.srv) | Change the speed profile of WHILL |
+| /whill/set_battery_saving_srv | [whill_msgs/SetBatterySaving](https://github.com/WHILL/ros2_whill_interfaces/blob/humble/whill_msgs/srv/SetBatterySaving.srv) | Configure the battery protection settings of WHILL |
 
 
 ### *Command examples*
@@ -139,6 +140,13 @@ ros2 topic pub -r 12 /whill/controller/cmd_vel geometry_msgs/Twist '{linear: {x:
 
 ```sh
 ros2 service call /whill/set_speed_profile_srv whill_msgs/SetSpeedProfile '{s1: 4, fm1: 60, fa1: 32, fd1: 96, rm1: 20, ra1: 24, rd1: 64, tm1: 35, ta1: 56, td1: 72}'
+```
+
+
+##### Configure the battery protection settings (default values)
+
+```sh
+ros2 service call /whill/set_battery_saving_srv whill_msgs/SetBatterySaving '{l0: 19, b0: 1}'
 ```
 
 

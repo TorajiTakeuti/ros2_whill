@@ -67,6 +67,7 @@ public:
     uint8_t rm1, uint8_t ra1, uint8_t rd1,
     uint8_t tm1, uint8_t ta1, uint8_t td1);
   int SendSetBatteryVoltageOutCommand(uint8_t battery_out);
+  int SendSetBatterySavingCommand(uint8_t low_battery_level, uint8_t sounds_buzzer);
   int SendSetVelocityCommand(int linear, int angular);
   int ReceiveDataset0(std::shared_ptr<whill_msgs::msg::SpeedProfile> & msg);
   int ReceiveDataset1(std::shared_ptr<whill_msgs::msg::ModelCr2State> & msg);

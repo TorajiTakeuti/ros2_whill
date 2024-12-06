@@ -26,8 +26,8 @@ enum CommandId : uint8_t
   kSetJoystick,
   kSetSpeedProfile,
   kSetBatteryVoltageOut,
-  kReserved1,
-  kReserved2,
+  kSetBatterySaving,
+  kReserved,
   kSetVelocity,
   kMax
 };
@@ -43,8 +43,8 @@ enum CommandSize : uint8_t
   kSetJoystickCommandSize = 5,
   kSetSpeedProfileCommandSize = 12,
   kSetBatteryVoltageOutCommandSize = 3,
-  kReserved1CommandSize,
-  kReserved2CommandSize,
+  kSetBatterySavingCommandSize = 4,
+  kReservedCommandSize,
   kSetVelocityCommandSize = 7,
   kMaxCommandSize = 16
 };
@@ -204,6 +204,20 @@ int Whill::SendSetBatteryVoltageOutCommand(uint8_t battery_out)
   packet[idx++] = CommandSize::kSetBatteryVoltageOutCommandSize;
   packet[idx++] = CommandId::kSetBatteryVoltageOut;
   packet[idx++] = battery_out;
+  packet[idx] = parser_->Checksum(packet, idx);
+  return port_->Send(packet, sizeof(packet));
+}
+
+int Whill::SendSetBatterySavingCommand(uint8_t low_battery_level, uint8_t sounds_buzzer)
+{
+  int idx = 0;
+  uint8_t packet[kHeaderSize + CommandSize::kSetBatterySavingCommandSize] = {0};
+
+  packet[idx++] = kProtocolSign;
+  packet[idx++] = CommandSize::kSetBatterySavingCommandSize;
+  packet[idx++] = CommandId::kSetBatterySaving;
+  packet[idx++] = low_battery_level;
+  packet[idx++] = sounds_buzzer;
   packet[idx] = parser_->Checksum(packet, idx);
   return port_->Send(packet, sizeof(packet));
 }
