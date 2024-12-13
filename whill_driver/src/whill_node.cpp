@@ -248,7 +248,7 @@ void WhillNode::OnSetBatterySavingSrv(
     return;
   }
 
-  RCLCPP_INFO(this->get_logger(), "Battery saving settings are set");
+  RCLCPP_INFO(this->get_logger(), "Battery saving settings are set (l0: %d, b0: %d)", l0, b0);
   whill_->SendSetBatterySavingCommand(l0, b0);
   response->result = 1;
 }
