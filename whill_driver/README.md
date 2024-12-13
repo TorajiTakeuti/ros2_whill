@@ -79,6 +79,7 @@ Whill -- WhillModelCMsg
 Whill -- SpeedProfileMsg
 Whill -- SetPowerSrv
 Whill -- SetSpeedProfileSrv
+Whill -- SetBatterySavingSrv
 ```
 
 
