@@ -57,6 +57,8 @@ void WhillNode::Initialize()
   set_battery_voltage_out_srv_ = this->create_service<whill_msgs::srv::SetBatteryVoltageOut>(
     "/whill/set_battery_voltage_out_srv",
     std::bind(&WhillNode::OnSetBatteryVoltageOutSrv, this, _1, _2, _3));
+  set_battery_saving_srv_ = this->create_service<whill_msgs::srv::SetBatterySaving>(
+    "/whill/set_battery_saving_srv", std::bind(&WhillNode::OnSetBatterySavingSrv, this, _1, _2, _3));
 
   // start sending WHILL State Dataset1
   whill_->SendStartSendingDataCommand(
@@ -225,6 +227,30 @@ void WhillNode::OnSetBatteryVoltageOutSrv(
       break;
   }
   RCLCPP_WARN(this->get_logger(), "BatteryVoltageOut command is not available on Model CR2!!");
+}
+
+void WhillNode::OnSetBatterySavingSrv(
+  const std::shared_ptr<rmw_request_id_t> request_header,
+  const std::shared_ptr<whill_msgs::srv::SetBatterySaving::Request> request,
+  const std::shared_ptr<whill_msgs::srv::SetBatterySaving::Response> response)
+{
+  (void)request_header;
+  response->result = -1;
+
+  uint8_t l0 = uint8_t(request->l0);
+  uint8_t b0 = uint8_t(request->b0);
+  if (IsOutside(l0, 1, 90)) {
+    RCLCPP_WARN(this->get_logger(), "l0 must be assingned between 1 - 90");
+    return;
+  }
+  if (IsOutside(b0, 0, 1)) {
+    RCLCPP_WARN(this->get_logger(), "b0 must be assingned between 0 - 1");
+    return;
+  }
+
+  RCLCPP_INFO(this->get_logger(), "Battery saving settings are set (l0: %d, b0: %d)", l0, b0);
+  whill_->SendSetBatterySavingCommand(l0, b0);
+  response->result = 1;
 }
 
 /**
