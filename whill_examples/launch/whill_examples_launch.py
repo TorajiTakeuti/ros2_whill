@@ -7,6 +7,7 @@ from launch.substitutions import PathJoinSubstitution
 from launch_ros.substitutions import FindPackageShare
 from launch_ros.actions import Node
 
+
 def generate_launch_description():
     return LaunchDescription([
         Node(
@@ -14,7 +15,7 @@ def generate_launch_description():
             namespace='',
             executable='whill',
             name='whill',
-            parameters=[PathJoinSubstitution([FindPackageShare('whill_examples'), 'params.yaml'])],
+            parameters=[PathJoinSubstitution([FindPackageShare('whill_examples'), 'config', 'params.yaml'])],
         ),
         Node(
             package='whill_examples',
