@@ -305,4 +305,29 @@
         <child link="right_arm" />
         <origin xyz="0 -0.245 0.30" rpy="0 1.0 0"/>
     </joint>
+    
+    <!-- Diff Drive Plugin -->
+    <gazebo>
+      <plugin
+        filename="libgz-sim-diff-drive-system.so"
+        name="gz::sim::systems::DiffDrive">
+    
+        <!-- 左右車輪のジョイント名 -->
+        <left_joint>left_wheel_joint</left_joint>
+        <right_joint>right_wheel_joint</right_joint>
+
+        <!-- 制御するトピック名 -->
+        <topic>cmd_vel</topic>
+
+        <!-- エンコーダのフィードバック -->
+        <odom_topic>odom</odom_topic>
+        <odom_frame>odom</odom_frame>
+        <base_frame>base_link</base_frame>
+
+        <!-- ホイールのパラメータ（適宜修正してください） -->
+        <wheel_separation>0.45</wheel_separation>
+        <wheel_radius>0.1</wheel_radius>
+      </plugin>
+    </gazebo>
+
 </robot>
