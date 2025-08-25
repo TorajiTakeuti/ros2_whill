@@ -1,6 +1,7 @@
-<xacro:macro xmlns:xacro="http://ros.org/wiki/xacro"
-            name="lrf_v0"
-            params="prefix='front' parent='base_link' min_rad='-3.14' max_rad='3.14' min_range='0.06' max_range='10.0' gazebo='classic'">
+<!-- file: urdf/lider/lider.urdf.xacro --- -->
+<!-- lider: standalone lidar macro. Place at: <your_package>/urdf/lider/lider.urdf.xacro -->
+<xacro:macro name="lrf_v0" params="prefix='front' parent='base_link' min_rad='-3.14' max_rad='3.14' min_range='0.06' max_range='10.0' gazebo='classic'">
+  <!-- link for lidar -->
   <link name="${prefix}_lrf_link">
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -13,9 +14,11 @@
   <joint name="${prefix}_lrf_joint" type="fixed">
     <parent link="${parent}"/>
     <child link="${prefix}_lrf_link"/>
+    <!-- joint_origin can be overridden by nested <joint_origin> in robot_top -->
     <origin xyz="0 0 0" rpy="0 0 0"/>
   </joint>
 
+  <!-- Gazebo sensor (classic) -->
   <xacro:if value="${gazebo == 'classic'}">
     <gazebo reference="${prefix}_lrf_link">
       <sensor type="ray" name="${prefix}_laser">
@@ -38,4 +41,8 @@
       </sensor>
     </gazebo>
   </xacro:if>
+
+  <!-- Ignition/Garden sensor could be added here (omitted for brevity) -->
+
 </xacro:macro>
+
