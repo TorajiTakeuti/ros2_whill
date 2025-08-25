@@ -1,5 +1,10 @@
 <?xml version="1.0"?>
-<robot name="whill_model_cr2">
+<robot name="${robot_name}" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:arg name="robot_name" default="whill_model_cr2"/>
+  <!-- もし Gazebo 切り替えを使うなら下も -->
+  <xacro:arg name="gazebo" default="classic"/>
+  <xacro:arg name="use_ros2_control" default="false"/>
+
 
     <link name="base_link">
         <visual>
@@ -305,6 +310,13 @@
         <child link="right_arm" />
         <origin xyz="0 -0.245 0.30" rpy="0 1.0 0"/>
     </joint>
+
+    <xacro:include filename="$(find whill_description)/urdf/lider/lider.urdf.xacro"/>
+    <xacro:lrf_v0 prefix="front" parent="backrest">
+      <joint_origin>
+        <origin xyz="0.1 0.25 " rpy="0 0 0"/>
+      </joint_origin>
+    </xacro:lrf_v0>
     
     <!-- Diff Drive Plugin -->
     <gazebo>
@@ -331,3 +343,4 @@
     </gazebo>
 
 </robot>
+

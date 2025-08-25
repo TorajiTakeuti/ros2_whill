@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
 
-  <xacro:include filename="$(find ros2_whill)/whill_description/urdf/common.xacro"/>
-  <xacro:include filename="$(find ros2_whill)/whill_description/urdf/lider/lider.gazebo.xacro"/>
+  <xacro:include filename="$(find whill_description)/urdf/common.xacro"/>
+  <xacro:include filename="$(find whill_description)/urdf/lider/lider.gazebo.xacro"/>
 
-  <xacro:macro name="lrf_v0" params="prefix parent *joint_origin">
+  <xacro:macro name="lrf_v0" params="prefix parent *backrest">
     <joint name="${prefix}_lrf_joint" type="fixed">
       <xacro:insert_block name="joint_origin"/>
       <parent link="${parent}"/>
@@ -14,12 +14,12 @@
     <link name="${prefix}_lrf_link">
       <visual>
         <geometry>
-          <mesh filename="file://$(find ros2_whill)/whill_description/model/meshes/dae/lrf.dae"/>
+          <mesh filename="file://$(find whill_description)/model/meshes/dae/lrf.dae"/>
         </geometry>
       </visual>
       <collision>
         <geometry>
-          <mesh filename="file://$(find ros2_whill)/whill_description/model/meshes/stl/lrf.stl"/>
+          <mesh filename="file://$(find whill_description)/model/meshes/stl/lrf.stl"/>
         </geometry>
       </collision>
       <inertial>
