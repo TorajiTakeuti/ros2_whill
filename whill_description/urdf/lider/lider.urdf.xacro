@@ -1,32 +1,51 @@
-<?xml version="1.0"?>
-<robot xmlns:xacro="http://ros.org/wiki/xacro">
+--- file: urdf/lider/lider.urdf.xacro ---
+<!-- lider: standalone lidar macro. Place at: <your_package>/urdf/lider/lider.urdf.xacro -->
+<xacro:macro name="lrf_v0" params="prefix='front' parent='base_link' min_rad='-3.14' max_rad='3.14' min_range='0.06' max_range='10.0' gazebo='classic'">
+<!-- link for lidar -->
+<link name="${prefix}_lrf_link">
+<visual>
+<origin xyz="0 0 0" rpy="0 0 0"/>
+<geometry>
+<cylinder length="0.02" radius="0.03"/>
+</geometry>
+</visual>
+</link>
 
-  <xacro:include filename="$(find whill_description)/urdf/common.xacro"/>
-  <xacro:include filename="$(find whill_description)/urdf/lider/lider.gazebo.xacro"/>
 
-  <xacro:macro name="lrf_v0" params="prefix parent *backrest">
-    <joint name="${prefix}_lrf_joint" type="fixed">
-      <xacro:insert_block name="joint_origin"/>
-      <parent link="${parent}"/>
-      <child link="${prefix}_lrf_link"/>
-    </joint>
+<joint name="${prefix}_lrf_joint" type="fixed">
+<parent link="${parent}"/>
+<child link="${prefix}_lrf_link"/>
+<!-- joint_origin can be overridden by nested <joint_origin> in robot_top -->
+<origin xyz="0 0 0" rpy="0 0 0"/>
+</joint>
 
-    <link name="${prefix}_lrf_link">
-      <visual>
-        <geometry>
-          <mesh filename="file://$(find whill_description)/model/meshes/dae/lrf.dae"/>
-        </geometry>
-      </visual>
-      <collision>
-        <geometry>
-          <mesh filename="file://$(find whill_description)/model/meshes/stl/lrf.stl"/>
-        </geometry>
-      </collision>
-      <inertial>
-        <origin xyz="0 0 0"/>
-        <xacro:box_inertial mass="0.218" height="0.07" width="0.05" depth="0.05"/>
-      </inertial>
-    </link>
-  </xacro:macro>
 
-</robot>
+<!-- Gazebo sensor (classic) -->
+<xacro:if value="${gazebo == 'classic'}">
+<gazebo reference="${prefix}_lrf_link">
+<sensor type="ray" name="${prefix}_laser">
+<update_rate>20</update_rate>
+<ray>
+<scan>
+<horizontal>
+<samples>360</samples>
+<resolution>1</resolution>
+</horizontal>
+</scan>
+<range>
+<min>${min_range}</min>
+<max>${max_range}</max>
+</range>
+</ray>
+<plugin name="${prefix}_gazebo_laser_plugin" filename="libgazebo_ros_range.so">
+<topicName>/${prefix}/scan</topicName>
+</plugin>
+</sensor>
+</gazebo>
+</xacro:if>
+
+
+<!-- Ignition/Garden sensor could be added here (omitted for brevity) -->
+
+
+</xacro:macro>
