@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<robot name="robot_top" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:arg name="robot_name" default="whill_model_cr2"/>
+  <xacro:arg name="gazebo" default="classic"/>
+  <xacro:arg name="use_ros2_control" default="false"/>
+  <xacro:arg name="prefix" default="front"/>
+
+  <!-- Include body & lidar (paths assume package name 'whill_description') -->
+  <xacro:include filename="$(find whill_description)/urdf/body/whill_model_cr2.urdf.xacro"/>
+  <xacro:include filename="$(find whill_description)/urdf/lider/lider.urdf.xacro"/>
+
+  <!-- Insert body (macro emits links/joints only) -->
+  <xacro:whill_body_v0 robot_name="${robot_name}" gazebo="${gazebo}" use_ros2_control="${use_ros2_control}"/>
+
+  <!-- Attach lidar to the backrest (example). You can override joint_origin here. -->
+  <xacro:lrf_v0 prefix="front" parent="backrest" gazebo="${gazebo}">
+    <joint_origin>
+      <origin xyz="0.10 0.25 0.00" rpy="0 0 0"/>
+    </joint_origin>
+  </xacro:lrf_v0>
+
+</robot>
