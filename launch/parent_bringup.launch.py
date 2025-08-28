@@ -19,10 +19,10 @@ def generate_launch_description():
     pkg = get_package_share_directory('whill_description')
 
     # 各子ラウンチファイルへのパス
-    ignition_launch = os.path.join(pkg, 'launch', 'ignition_gazebo.launch.py')
-    robot_desc_launch = os.path.join(pkg, 'launch', 'robot_description.launch.py')
-    controllers_launch = os.path.join(pkg, 'launch', 'controllers.launch.py')
-    spawn_launch = os.path.join(pkg, 'launch', 'spawn_robot.launch.py')
+    ignition_launch = os.path.join(pkg, 'ignition_gazebo.launch.py')
+    robot_desc_launch = os.path.join(pkg, 'robot_description.launch.py')
+    controllers_launch = os.path.join(pkg, 'controllers.launch.py')
+    spawn_launch = os.path.join(pkg, 'spawn_robot.launch.py')
 
     # Include each child launch
     include_ign = IncludeLaunchDescription(

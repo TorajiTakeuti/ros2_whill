@@ -6,8 +6,8 @@
   <xacro:arg name="prefix" default="front"/>
 
   <!-- Include body & lidar (paths assume package name 'whill_description') -->
-  <xacro:include filename="$(find whill_description)/urdf/body/whill_model_cr2.urdf.xacro"/>
-  <xacro:include filename="$(find whill_description)/urdf/lider/lider.urdf.xacro"/>
+  <xacro:include filename="/home/map4/whill_ws/src/ros2_whill/whill_description/urdf/body/whill_model_cr2.urdf.xacro"/>
+  <xacro:include filename="/home/map4/whill_ws/src/ros2_whill/whill_description/urdf/lider/lider.urdf.xacro"/>
 
   <!-- Insert body (macro emits links/joints only) -->
   <xacro:whill_body_v0 robot_name="${robot_name}" gazebo="${gazebo}" use_ros2_control="${use_ros2_control}"/>

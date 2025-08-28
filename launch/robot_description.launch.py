@@ -11,7 +11,7 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time')
     gazebo = LaunchConfiguration('gazebo')
 
-    xacro_file = PathJoinSubstitution([FindPackageShare('whill_description'), 'urdf', 'robot_top.urdf.xacro'])
+    xacro_file = PathJoinSubstitution([FindPackageShare('whill_description'), 'robot_top.urdf.xacro'])
     robot_description_command = Command(['xacro ', xacro_file, ' ', 'gazebo:=', gazebo])
 
     rsp_node = Node(

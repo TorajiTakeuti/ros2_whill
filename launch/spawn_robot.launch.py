@@ -6,7 +6,7 @@ from launch_ros.substitutions import FindPackageShare
 
 def get_robot_description(context):
     pkg_path = FindPackageShare('whill_description').find('whill_description')
-    xacro_file = os.path.join(pkg_path, 'urdf', 'robot_top.urdf.xacro')
+    xacro_file = os.path.join(pkg_path, 'robot_top.urdf.xacro')
     
     robot_description = Command([FindExecutable(name='xacro'), ' ', xacro_file])
     
